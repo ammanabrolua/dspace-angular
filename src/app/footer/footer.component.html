@@ -53,32 +53,32 @@
   <!-- Grid container -->
 
   <!-- Copyright -->
-  <div class="bottom-footer p-1 d-flex justify-content-center align-items-center text-white">
+  <div class="bottom-footer p-1 d-flex justify-content-center align-items-center text-link">
     <div class="content-container">
-      <p class="m-0">
+      <!-- <p class="m-0">
         <a class="text-white"
            href="http://www.dspace.org/">{{ 'footer.link.dspace' | translate}}</a>
         {{ 'footer.copyright' | translate:{year: dateObj | date:'y'} }}
         <a class="text-white"
            href="https://www.lyrasis.org/">{{ 'footer.link.lyrasis' | translate}}</a>
-      </p>
+      </p> -->
       <ul class="footer-info list-unstyled small d-flex justify-content-center mb-0">
         <li>
-          <a class="text-white" href="javascript:void(0);"
-             (click)="showCookieSettings()">{{ 'footer.link.cookies' | translate}}</a>
+          <a class="text-link" href="javascript:void(0);"
+             (click)="showCookieSettings()">{{ 'footer.link.imprint' | translate}}</a>
         </li>
         <li>
-          <a class="text-white"
+          <a class="text-link"
              routerLink="info/privacy">{{ 'footer.link.privacy-policy' | translate}}</a>
         </li>
         <li>
-          <a class="text-white"
-             routerLink="info/end-user-agreement">{{ 'footer.link.end-user-agreement' | translate}}</a>
+          <a class="text-link"
+             routerLink="info/end-user-agreement">{{ 'footer.link.accessibility' | translate}}</a>
         </li>
-        <li>
-          <a class="text-white"
+        <!-- <li>
+          <a class="text-link"
              routerLink="info/feedback">{{ 'footer.link.feedback' | translate}}</a>
-        </li>
+        </li> -->
       </ul>
     </div>
   </div>

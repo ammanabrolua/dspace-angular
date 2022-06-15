@@ -2,21 +2,12 @@
   display: block;
   margin-top: calc(var(--ds-content-spacing) * -1);
 
-  div.background-image-container {
+  div.background-image {
     color: white;
+    background-color: var(--bs-info);
     position: relative;
-
-    .background-image > img {
-      background-color: var(--bs-info);
-      position: absolute;
-      z-index: -1;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: top;
-    }
+    background-image: url('/assets/dspace/images/banner.jpg');
+    background-size: cover;
 
     .container {
       position: relative;

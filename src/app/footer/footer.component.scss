@@ -1,6 +1,6 @@
 :host {
   footer {
-    background-color: var(--ds-footer-bg);
+    background-color: #e6e6e6;
     text-align: center;
     z-index: var(--ds-footer-z-index);
     border-top: var(--ds-footer-border);
@@ -41,7 +41,8 @@
         }
       }
     }
+    .text-link {
+    color: var(--ds-navbar-link-color);
+    }
   }
 }
-
-

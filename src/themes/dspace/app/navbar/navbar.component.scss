@@ -1,7 +1,9 @@
 nav.navbar {
-  border-top: 1px var(--ds-header-navbar-border-top-color) solid;
-  border-bottom: 5px var(--bs-green) solid;
+  border-bottom: 5px #fff solid;
+  border-left: 1px #fff solid;
+  border-right: 1px #fff solid;
   align-items: baseline;
+  background-color: #eee;
   color: var(--ds-header-icon-color);
 }
 
@@ -9,7 +11,6 @@ nav.navbar {
 @media screen and (max-width: map-get($grid-breakpoints, md)) {
   .navbar {
     width: 100%;
-    background-color: var(--bs-white);
     position: absolute;
     overflow: hidden;
     height: 0;

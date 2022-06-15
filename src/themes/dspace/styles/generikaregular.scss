@@ -1,0 +1,36 @@
+@font-face {
+    font-family: 'generikaregular';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../assets/fonts/Generika-Regular_web.eot');
+    src: url('../assets/fonts/Generika-Regular_web.eot?#iefix') format('embedded-opentype'),
+    url('../assets/fonts/Generika-Regular_web.woff') format('woff'),
+    url('../assets/fonts/Generika-Regular_web.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: 'generikaregular';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../assets/fonts/Generika-Bold_web.eot');
+    src: url('../assets/fonts/Generika-Bold_web.eot?#iefix') format('embedded-opentype'),
+    url('../assets/fonts/Generika-Bold_web.woff') format('woff'),
+    url('../assets/fonts/Generika-Bold_web.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: 'generikaregular';
+    font-style: italic;
+    font-weight: 400;
+    src: url('../assets/fonts/Generika-Italic_web.eot');
+    src: url('../assets/fonts/Generika-Italic_web.eot?#iefix') format('embedded-opentype'),
+    url('../assets/fonts/Generika-Italic_web.woff') format('woff'),
+    url('../assets/fonts/Generika-Italic_web.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: 'generikaregular';
+    font-style: italic;
+    font-weight: 700;
+    src: url('../assets/fonts/Generika-BoldItalic_web.eot');
+    src: url('../assets/fonts/Generika-BoldItalic_web.eot?#iefix') format('embedded-opentype'),
+    url('../assets/fonts/Generika-BoldItalic_web.woff') format('woff'),
+    url('../assets/fonts/Generika-BoldItalic_web.ttf') format('truetype');
+  }

@@ -50,18 +50,18 @@ import { MenuItemType } from '../shared/menu/menu-item-type.model';
           }
         ],
         data: {
-          menu: {
-            public: [{
-              id: 'statistics_community_:id',
-              active: true,
-              visible: true,
-              model: {
-                type: MenuItemType.LINK,
-                text: 'menu.section.statistics',
-                link: 'statistics/communities/:id/',
-              } as LinkMenuItemModel,
-            }],
-          },
+          // menu: {
+          //   public: [{
+          //     id: 'statistics_community_:id',
+          //     active: true,
+          //     visible: true,
+          //     model: {
+          //       type: MenuItemType.LINK,
+          //       text: 'menu.section.statistics',
+          //       link: 'statistics/communities/:id/',
+          //     } as LinkMenuItemModel,
+          //   }],
+          // },
         },
       },
     ])

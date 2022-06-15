@@ -350,7 +350,7 @@ export class AppComponent implements OnInit, AfterViewInit {
             'tagName': 'link',
             'attributes': {
               'rel': 'icon',
-              'href': 'assets/images/favicon.ico',
+              'href': 'assets/images/renate_logo.ico',
               'sizes': 'any',
             }
           })
