@@ -92,10 +92,32 @@ export class MenuResolver implements Resolve<boolean> {
     const menuList: any[] = [
       /* Communities & Collections tree */
       {
-        id: `browse_global_communities_and_collections`,
+        id: `home`,
         active: false,
         visible: true,
         index: 0,
+        model: {
+          type: MenuItemType.LINK,
+          text: `menu.section.home`,
+          link: `/`
+        } as LinkMenuItemModel
+      },
+      {
+        id: `browse_global`,
+        active: false,
+        visible: true,
+        index: 1,
+        model: {
+          type: MenuItemType.LINK,
+          text: `menu.section.home`,
+          link: `/`
+        } as LinkMenuItemModel
+      },
+      {
+        id: `browse_global_communities_and_collections`,
+        active: false,
+        visible: true,
+        parentID: 'browse_global',
         model: {
           type: MenuItemType.LINK,
           text: `menu.section.browse_global_communities_and_collections`,
@@ -134,226 +156,53 @@ export class MenuResolver implements Resolve<boolean> {
               } as TextMenuItemModel,
             }
           );
+         
         }
-        menuList.forEach((menuSection) => this.menuService.addSection(MenuID.PUBLIC, Object.assign(menuSection, {
+
+        menuList.push({
+          id: `lilly`,
+          parentID: 'uber_renate',
+          active: false,
+          visible: true,
+          model: {
+            type: MenuItemType.LINK,
+            text: `menu.section.lilly`,
+            link: `/home/policy`
+          } as LinkMenuItemModel
+        });
+
+        menuList.push(
+          /* Browse */
+          {
+            id: 'uber_renate',
+            active: false,
+            visible: true,
+            index: 2,
+            model: {
+              type: MenuItemType.TEXT,
+              text: 'menu.section.uber_renate'
+            } as TextMenuItemModel,
+          }
+        );
+        menuList.push(
+          /* Browse */
+          {
+            id: 'help',
+            active: false,
+            visible: true,
+            index: 3,
+            model: {
+              type: MenuItemType.ONCLICK,
+              text: 'menu.section.help',
+              function()  {let windowObjectReference = null; if (windowObjectReference == null || windowObjectReference.closed) { windowObjectReference = window.open('https://oa.tib.eu/jspui/help/index.html', '_blank', 'popup'); return {} } else { windowObjectReference.focus();}}
+            } as OnClickMenuItemModel,
+          });
+        
+       
+        menuList.forEach((menuSection) => this.menuService.addSection(this.menuID, Object.assign(menuSection, {
           shouldPersistOnRouteChange: true
         })));
       });
-
-    return this.waitForMenu$(MenuID.PUBLIC);
-  }
-
-  /**
-   * Initialize all menu sections and items for {@link MenuID.ADMIN}
-   */
-  createAdminMenu$() {
-    this.createMainMenuSections();
-    this.createSiteAdministratorMenuSections();
-    this.createExportMenuSections();
-    this.createImportMenuSections();
-    this.createAccessControlMenuSections();
-
-    return this.waitForMenu$(MenuID.ADMIN);
-  }
-
-  /**
-   * Initialize the main menu sections.
-   * edit_community / edit_collection is only included if the current user is a Community or Collection admin
-   */
-  createMainMenuSections() {
-    combineLatest([
-      this.authorizationService.isAuthorized(FeatureID.IsCollectionAdmin),
-      this.authorizationService.isAuthorized(FeatureID.IsCommunityAdmin),
-      this.authorizationService.isAuthorized(FeatureID.AdministratorOf)
-    ]).subscribe(([isCollectionAdmin, isCommunityAdmin, isSiteAdmin]) => {
-      const menuList = [
-        /* News */
-        {
-          id: 'new',
-          active: false,
-          visible: true,
-          model: {
-            type: MenuItemType.TEXT,
-            text: 'menu.section.new'
-          } as TextMenuItemModel,
-          icon: 'plus',
-          index: 0
-        },
-        {
-          id: 'new_community',
-          parentID: 'new',
-          active: false,
-          visible: isCommunityAdmin,
-          model: {
-            type: MenuItemType.ONCLICK,
-            text: 'menu.section.new_community',
-            function: () => {
-              this.modalService.open(CreateCommunityParentSelectorComponent);
-            }
-          } as OnClickMenuItemModel,
-        },
-        {
-          id: 'new_collection',
-          parentID: 'new',
-          active: false,
-          visible: isCommunityAdmin,
-          model: {
-            type: MenuItemType.ONCLICK,
-            text: 'menu.section.new_collection',
-            function: () => {
-              this.modalService.open(CreateCollectionParentSelectorComponent);
-            }
-          } as OnClickMenuItemModel,
-        },
-        {
-          id: 'new_item',
-          parentID: 'new',
-          active: false,
-          visible: true,
-          model: {
-            type: MenuItemType.ONCLICK,
-            text: 'menu.section.new_item',
-            function: () => {
-              this.modalService.open(CreateItemParentSelectorComponent);
-            }
-          } as OnClickMenuItemModel,
-        },
-        {
-          id: 'new_process',
-          parentID: 'new',
-          active: false,
-          visible: isCollectionAdmin,
-          model: {
-            type: MenuItemType.LINK,
-            text: 'menu.section.new_process',
-            link: '/processes/new'
-          } as LinkMenuItemModel,
-        },
-        // TODO: enable this menu item once the feature has been implemented
-        // {
-        //   id: 'new_item_version',
-        //   parentID: 'new',
-        //   active: false,
-        //   visible: true,
-        //   model: {
-        //     type: MenuItemType.LINK,
-        //     text: 'menu.section.new_item_version',
-        //     link: ''
-        //   } as LinkMenuItemModel,
-        // },
-
-        /* Edit */
-        {
-          id: 'edit',
-          active: false,
-          visible: true,
-          model: {
-            type: MenuItemType.TEXT,
-            text: 'menu.section.edit'
-          } as TextMenuItemModel,
-          icon: 'pencil-alt',
-          index: 1
-        },
-        {
-          id: 'edit_community',
-          parentID: 'edit',
-          active: false,
-          visible: isCommunityAdmin,
-          model: {
-            type: MenuItemType.ONCLICK,
-            text: 'menu.section.edit_community',
-            function: () => {
-              this.modalService.open(EditCommunitySelectorComponent);
-            }
-          } as OnClickMenuItemModel,
-        },
-        {
-          id: 'edit_collection',
-          parentID: 'edit',
-          active: false,
-          visible: isCollectionAdmin,
-          model: {
-            type: MenuItemType.ONCLICK,
-            text: 'menu.section.edit_collection',
-            function: () => {
-              this.modalService.open(EditCollectionSelectorComponent);
-            }
-          } as OnClickMenuItemModel,
-        },
-        {
-          id: 'edit_item',
-          parentID: 'edit',
-          active: false,
-          visible: true,
-          model: {
-            type: MenuItemType.ONCLICK,
-            text: 'menu.section.edit_item',
-            function: () => {
-              this.modalService.open(EditItemSelectorComponent);
-            }
-          } as OnClickMenuItemModel,
-        },
-
-        /* Statistics */
-        // TODO: enable this menu item once the feature has been implemented
-        // {
-        //   id: 'statistics_task',
-        //   active: false,
-        //   visible: true,
-        //   model: {
-        //     type: MenuItemType.LINK,
-        //     text: 'menu.section.statistics_task',
-        //     link: ''
-        //   } as LinkMenuItemModel,
-        //   icon: 'chart-bar',
-        //   index: 8
-        // },
-
-        /* Control Panel */
-        // TODO: enable this menu item once the feature has been implemented
-        // {
-        //   id: 'control_panel',
-        //   active: false,
-        //   visible: isSiteAdmin,
-        //   model: {
-        //     type: MenuItemType.LINK,
-        //     text: 'menu.section.control_panel',
-        //     link: ''
-        //   } as LinkMenuItemModel,
-        //   icon: 'cogs',
-        //   index: 9
-        // },
-
-        /* Processes */
-        {
-          id: 'processes',
-          active: false,
-          visible: isSiteAdmin,
-          model: {
-            type: MenuItemType.LINK,
-            text: 'menu.section.processes',
-            link: '/processes'
-          } as LinkMenuItemModel,
-          icon: 'terminal',
-          index: 10
-        },
-        {
-          id: 'health',
-          active: false,
-          visible: isSiteAdmin,
-          model: {
-            type: MenuItemType.LINK,
-            text: 'menu.section.health',
-            link: '/health'
-          } as LinkMenuItemModel,
-          icon: 'heartbeat',
-          index: 11
-        },
-      ];
-      menuList.forEach((menuSection) => this.menuService.addSection(MenuID.ADMIN, Object.assign(menuSection, {
-        shouldPersistOnRouteChange: true
-      })));
-    });
   }
 
   /**
